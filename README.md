@@ -52,6 +52,24 @@ Default directories:
 - codex-cli: `~/.codex/skills`
 - copilot-cli: `~/.copilot-cli/skills`
 
+### Initialize Another Directory (Repo-Scoped)
+
+Initialize skills in another directory relative to your current working directory:
+
+```bash
+./scripts/init-skills-dir.sh ../other-repo
+```
+
+This creates repo-scoped skill directories:
+- Codex: `.codex/skills`
+- GitHub Copilot: `.github/skills`
+
+By default, existing skill entries are skipped. Use `--clean` to remove existing entries before installing:
+
+```bash
+./scripts/init-skills-dir.sh ../other-repo --clean
+```
+
 ### Other Commands
 
 List available skills:
