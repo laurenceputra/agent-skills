@@ -94,7 +94,7 @@ When creating or reviewing documentation, you should:
 
 ## README Template
 
-```markdown
+~~~markdown
 # Project Name
 
 Brief description of what the project does
@@ -132,7 +132,7 @@ Guidelines for contributors
 ## License
 
 License information
-```
+~~~
 
 ## Output Format
 

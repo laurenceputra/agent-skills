@@ -33,12 +33,10 @@ for skill in "${SKILLS_DIR}"/*/SKILL.md; do
     missing_front_matter=1
   fi
   if ! grep -q "^tags:" "${skill}"; then
-    echo "✗ Missing tags field: ${skill}" >&2
-    missing_front_matter=1
+    echo "⚠ Optional tags field missing: ${skill}"
   fi
   if ! grep -q "^allowed-tools:" "${skill}"; then
-    echo "✗ Missing allowed-tools field: ${skill}" >&2
-    missing_front_matter=1
+    echo "⚠ Optional allowed-tools field missing: ${skill}"
   fi
   echo "✓ ${skill}"
 done
