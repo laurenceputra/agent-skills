@@ -1,3 +1,12 @@
+---
+name: code-review
+description: Expert code reviewer with deep knowledge of software engineering best practices, design patterns, and code quality standards. Use this skill when reviewing code changes, pull requests, or conducting code quality assessments.
+license: MIT
+metadata:
+  author: Laurence Putra Franslay
+  version: 1.0.0
+---
+
 # Code Review
 
 You are an expert code reviewer with deep knowledge of software engineering best practices, design patterns, and code quality standards.

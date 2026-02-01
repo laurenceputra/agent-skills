@@ -51,6 +51,38 @@ Uninstall skills:
 ./install-skills.sh uninstall
 ```
 
+## Skill Format
+
+Each skill follows the Open Agent Skills Standard with proper YAML front matter:
+
+```yaml
+---
+name: skill-name
+description: Clear description of what this skill does and when to use it
+license: MIT
+metadata:
+  author: Laurence Putra Franslay
+  version: 1.0.0
+---
+```
+
+### Directory Structure
+
+```
+skills/
+├── code-review/
+│   └── SKILL.md
+├── debugging-assistant/
+│   └── SKILL.md
+└── ...
+```
+
+Each skill is in its own directory containing a `SKILL.md` file with:
+- **YAML front matter** with required metadata
+- **Markdown content** describing the skill's expertise and guidelines
+
+This format is compatible with both codex-cli and copilot-cli.
+
 ## Skills Description
 
 ### Code Review
@@ -137,7 +169,7 @@ Example:
 
 ## How It Works
 
-The installation script creates symlinks from this repository's `skills/` directory to your CLI tools' skills directories. This means:
+The installation script creates symlinks from this repository's skill directories to your CLI tools' skills directories. Each skill is a directory containing a `SKILL.md` file with YAML front matter. This means:
 
 - ✅ Skills stay in sync with this repository
 - ✅ Easy to update (just pull latest changes)
@@ -162,14 +194,35 @@ Contributions are welcome! If you have ideas for new skills or improvements to e
 3. Add or modify skill files in the `skills/` directory
 4. Submit a pull request
 
-### Skill Format
+### Skill Format Requirements
 
-Skills are written in Markdown and should include:
+Each skill must follow this structure:
 
-1. **Title** - Clear name for the skill
-2. **Role Description** - What expertise this skill provides
-3. **Guidelines** - Specific instructions and best practices
-4. **Output Format** - How to structure responses
+```
+skills/
+└── skill-name/
+    └── SKILL.md
+```
+
+**SKILL.md must include:**
+
+1. **YAML Front Matter** (required):
+```yaml
+---
+name: skill-name
+description: Clear, actionable description (10-500 characters)
+license: MIT
+metadata:
+  author: Your Name
+  version: 1.0.0
+---
+```
+
+2. **Markdown Content**:
+   - **Title** - Clear name for the skill
+   - **Role Description** - What expertise this skill provides
+   - **Guidelines** - Specific instructions and best practices
+   - **Output Format** - How to structure responses
 
 See existing skills for examples.
 

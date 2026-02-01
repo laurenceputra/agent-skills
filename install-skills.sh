@@ -40,21 +40,21 @@ install_skills() {
         mkdir -p "$cli_dir"
     fi
     
-    # Create symlinks for each skill
+    # Create symlinks for each skill directory
     local count=0
-    for skill in "$SKILLS_DIR"/*.md; do
-        if [ -f "$skill" ]; then
-            local skill_name=$(basename "$skill")
+    for skill_dir in "$SKILLS_DIR"/*/; do
+        if [ -d "$skill_dir" ] && [ -f "$skill_dir/SKILL.md" ]; then
+            local skill_name=$(basename "$skill_dir")
             local target="$cli_dir/$skill_name"
             
-            # Remove existing symlink or file
+            # Remove existing symlink or directory
             if [ -e "$target" ] || [ -L "$target" ]; then
                 echo -e "  Removing existing: $skill_name"
-                rm -f "$target"
+                rm -rf "$target"
             fi
             
-            # Create symlink
-            ln -s "$skill" "$target"
+            # Create symlink to the skill directory
+            ln -s "$skill_dir" "$target"
             echo -e "  ${GREEN}✓${NC} Linked: $skill_name"
             count=$((count + 1))
         fi
@@ -78,9 +78,9 @@ uninstall_skills() {
     fi
     
     local count=0
-    for skill in "$SKILLS_DIR"/*.md; do
-        if [ -f "$skill" ]; then
-            local skill_name=$(basename "$skill")
+    for skill_dir in "$SKILLS_DIR"/*/; do
+        if [ -d "$skill_dir" ] && [ -f "$skill_dir/SKILL.md" ]; then
+            local skill_name=$(basename "$skill_dir")
             local target="$cli_dir/$skill_name"
             
             if [ -L "$target" ]; then
@@ -130,9 +130,9 @@ case "$COMMAND" in
     list)
         echo "Available skills:"
         echo ""
-        for skill in "$SKILLS_DIR"/*.md; do
-            if [ -f "$skill" ]; then
-                skill_name=$(basename "$skill" .md)
+        for skill_dir in "$SKILLS_DIR"/*/; do
+            if [ -d "$skill_dir" ] && [ -f "$skill_dir/SKILL.md" ]; then
+                skill_name=$(basename "$skill_dir")
                 echo -e "  ${GREEN}•${NC} $skill_name"
             fi
         done

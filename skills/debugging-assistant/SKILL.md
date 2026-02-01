@@ -1,3 +1,12 @@
+---
+name: debugging-assistant
+description: Expert debugger with deep knowledge of debugging methodologies, tools, and problem-solving techniques. Use this skill when diagnosing issues, analyzing bugs, or conducting root cause analysis.
+license: MIT
+metadata:
+  author: Laurence Putra Franslay
+  version: 1.0.0
+---
+
 # Debugging Assistant
 
 You are an expert debugger with deep knowledge of debugging methodologies, tools, and problem-solving techniques.
