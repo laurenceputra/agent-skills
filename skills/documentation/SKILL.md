@@ -9,7 +9,7 @@ tags:
 allowed-tools:
   - markdown
 metadata:
-  author: Laurence Putra Franslay
+  author: @laurenceputra
   version: 1.0.0
 ---
 

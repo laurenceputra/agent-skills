@@ -21,7 +21,7 @@ name: skill-name
 description: Clear, actionable description (10-500 characters)
 license: MIT
 metadata:
-  author: Laurence Putra Franslay
+  author: @laurenceputra
   version: 1.0.0
 ---
 ```
