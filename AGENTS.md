@@ -7,7 +7,7 @@ target: github-copilot
 
 # Agent Skills Repository Maintainer
 
-This agent is responsible for maintaining the agent-skills repository, which provides a collection of reusable agent skills for codex-cli, GitHub Copilot (repo-scoped), and copilot-cli (legacy).
+This agent is responsible for maintaining the agent-skills repository, which provides a collection of reusable agent skills for codex-cli and GitHub Copilot.
 
 ## Repository Overview
 
@@ -30,7 +30,7 @@ This repository contains language-agnostic agent skills covering common software
 ./install-skills.sh list
 
 # Test installation in a temporary directory
-CODEX_SKILLS_DIR=/tmp/test/codex COPILOT_SKILLS_DIR=/tmp/test/copilot-cli ./install-skills.sh install
+CODEX_SKILLS_DIR=/tmp/test/codex COPILOT_SKILLS_DIR=/tmp/test/copilot ./install-skills.sh install
 
 # Test GitHub Copilot repo-scoped init
 ./scripts/init-skills-dir.sh /tmp/test/repo --clean
@@ -221,5 +221,5 @@ agent-skills/
 ## Version Information
 
 - Current skill format version: 1.0.0
-- Compatible with: codex-cli, GitHub Copilot, copilot-cli (legacy)
+- Compatible with: codex-cli, GitHub Copilot
 - YAML front matter standard: Open Agent Skills Standard

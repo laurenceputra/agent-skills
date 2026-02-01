@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Agent Skills Installer
-# This script creates symlinks for agent skills in codex-cli and copilot-cli skills directories
+# This script creates symlinks for agent skills in codex-cli and a secondary skills directory
 
 set -e
 
@@ -97,7 +97,7 @@ uninstall_skills() {
 
 # Default skill directories
 CODEX_SKILLS_DIR="${CODEX_SKILLS_DIR:-$HOME/.codex/skills}"
-COPILOT_SKILLS_DIR="${COPILOT_SKILLS_DIR:-$HOME/.copilot-cli/skills}"
+COPILOT_SKILLS_DIR="${COPILOT_SKILLS_DIR:-$HOME/.copilot/skills}"
 
 # Parse command line arguments
 COMMAND="${1:-install}"
@@ -107,12 +107,12 @@ case "$COMMAND" in
         echo "Installing agent skills..."
         echo ""
         install_skills "codex-cli" "$CODEX_SKILLS_DIR"
-        install_skills "copilot-cli" "$COPILOT_SKILLS_DIR"
+        install_skills "secondary target" "$COPILOT_SKILLS_DIR"
         echo -e "${GREEN}Installation complete!${NC}"
         echo ""
         echo "Skills have been symlinked to:"
         echo "  - codex-cli: $CODEX_SKILLS_DIR"
-        echo "  - copilot-cli: $COPILOT_SKILLS_DIR"
+        echo "  - secondary target: $COPILOT_SKILLS_DIR"
         echo ""
         echo "To use custom directories, set these environment variables:"
         echo "  export CODEX_SKILLS_DIR=/your/custom/path"
@@ -123,7 +123,7 @@ case "$COMMAND" in
         echo "Uninstalling agent skills..."
         echo ""
         uninstall_skills "codex-cli" "$CODEX_SKILLS_DIR"
-        uninstall_skills "copilot-cli" "$COPILOT_SKILLS_DIR"
+        uninstall_skills "secondary target" "$COPILOT_SKILLS_DIR"
         echo -e "${GREEN}Uninstallation complete!${NC}"
         ;;
     
@@ -149,7 +149,7 @@ case "$COMMAND" in
         echo ""
         echo "Environment Variables:"
         echo "  CODEX_SKILLS_DIR    - Custom path for codex-cli skills (default: ~/.codex/skills)"
-        echo "  COPILOT_SKILLS_DIR  - Custom path for copilot-cli skills (default: ~/.copilot-cli/skills)"
+        echo "  COPILOT_SKILLS_DIR  - Custom path for secondary skills (default: ~/.copilot/skills)"
         exit 1
         ;;
 esac

@@ -32,7 +32,7 @@ This repository provides a curated set of agent skills covering essential softwa
 
 ### Quick Install
 
-Install skills for codex-cli and copilot-cli (legacy):
+Install skills for codex-cli and a secondary skills directory:
 
 ```bash
 ./install-skills.sh
@@ -46,15 +46,15 @@ You can customize the installation directories using environment variables:
 
 ```bash
 export CODEX_SKILLS_DIR=/path/to/your/codex/skills
-export COPILOT_SKILLS_DIR=/path/to/your/copilot-cli/skills
+export COPILOT_SKILLS_DIR=/path/to/your/copilot/skills
 ./install-skills.sh
 ```
 
-These variables apply to `./install-skills.sh` (codex-cli and copilot-cli legacy). For GitHub Copilot repo-scoped setup, use `./scripts/init-skills-dir.sh` below.
+These variables apply to `./install-skills.sh` (codex-cli and a secondary target). For GitHub Copilot repo-scoped setup, use `./scripts/init-skills-dir.sh` below.
 
 Default directories:
 - codex-cli (user scope): `~/.codex/skills`
-- copilot-cli (user scope, legacy): `~/.copilot-cli/skills`
+- secondary target (default): `~/.copilot/skills`
 - GitHub Copilot (repo scope): `.github/skills` (use `./scripts/init-skills-dir.sh`)
 
 ### Initialize Another Directory (Repo-Scoped)
