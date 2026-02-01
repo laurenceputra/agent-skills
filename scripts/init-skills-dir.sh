@@ -91,8 +91,8 @@ install_skills() {
         fi
       fi
 
-      ln -s "${skill_dir}" "${target}"
-      echo "  Linked: ${skill_name}"
+      cp -R "${skill_dir}" "${target}"
+      echo "  Copied: ${skill_name}"
       count=$((count + 1))
     fi
   done

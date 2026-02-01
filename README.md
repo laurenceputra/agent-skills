@@ -218,10 +218,10 @@ Example:
 
 ## How It Works
 
-The installation scripts create symlinks from this repository's skill directories to your tools' skills directories. For GitHub Copilot repo-scoped usage, `./scripts/init-skills-dir.sh` populates `.github/skills`. Each skill is a directory containing a `SKILL.md` file with YAML front matter. This means:
+The installation scripts copy this repository's skill directories into your tools' skills directories. For GitHub Copilot repo-scoped usage, `./scripts/init-skills-dir.sh` populates `.github/skills`. Each skill is a directory containing a `SKILL.md` file with YAML front matter. This means:
 
-- ✅ Skills stay in sync with this repository
-- ✅ Easy to update (just pull latest changes)
+- ✅ Easy to update (pull latest changes, then reinstall)
+- ✅ Safe to customize locally without affecting the repo
 - ✅ Single source of truth for all skills
 - ✅ Works across multiple CLI tools
 
@@ -231,7 +231,7 @@ To get the latest skills:
 
 ```bash
 git pull
-# Skills are automatically updated via symlinks
+./install-skills.sh install
 ```
 
 ## Contributing
