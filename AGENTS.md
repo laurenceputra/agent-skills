@@ -72,7 +72,7 @@ name: skill-name
 description: Clear, concise description of what this skill does and when to use it (10-500 characters)
 license: MIT
 metadata:
-  author: Laurence Putra Franslay
+  author: @laurenceputra
   version: 1.0.0
 ---
 ```
@@ -149,7 +149,7 @@ name: new-skill
 description: Brief description of what this skill does and when to use it
 license: MIT
 metadata:
-  author: Laurence Putra Franslay
+  author: @laurenceputra
   version: 1.0.0
 ---
 
