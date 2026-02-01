@@ -7,7 +7,7 @@ target: github-copilot
 
 # Agent Skills Repository Maintainer
 
-This agent is responsible for maintaining the agent-skills repository, which provides a collection of reusable agent skills for codex-cli and copilot-cli.
+This agent is responsible for maintaining the agent-skills repository, which provides a collection of reusable agent skills for codex-cli, GitHub Copilot (repo-scoped), and copilot-cli (legacy).
 
 ## Repository Overview
 
@@ -30,7 +30,10 @@ This repository contains language-agnostic agent skills covering common software
 ./install-skills.sh list
 
 # Test installation in a temporary directory
-CODEX_SKILLS_DIR=/tmp/test/codex COPILOT_SKILLS_DIR=/tmp/test/copilot ./install-skills.sh install
+CODEX_SKILLS_DIR=/tmp/test/codex COPILOT_SKILLS_DIR=/tmp/test/copilot-cli ./install-skills.sh install
+
+# Test GitHub Copilot repo-scoped init
+./scripts/init-skills-dir.sh /tmp/test/repo --clean
 
 # Verify skill structure
 for skill in skills/*/SKILL.md; do
@@ -93,7 +96,7 @@ metadata:
    - Ensure all skills have complete YAML front matter
    - Keep descriptions clear and actionable
    - Verify skills are language-agnostic
-   - Test skills work with both codex-cli and copilot-cli
+   - Test skills work with codex-cli and GitHub Copilot (repo-scoped)
 
 2. **Follow Naming Conventions**
    - Use lowercase with hyphens for skill names
@@ -108,7 +111,7 @@ metadata:
 4. **Test Changes**
    - Test installation script after modifications
    - Verify symlinks are created correctly
-   - Ensure skills load in both CLI tools
+   - Ensure skills load in codex-cli and GitHub Copilot
 
 5. **Preserve Structure**
    - Keep skills in `skills/skill-name/SKILL.md` format
@@ -130,9 +133,10 @@ Before committing changes:
 
 1. Run `./install-skills.sh list` to verify all skills are detected
 2. Test installation in a temporary directory
-3. Verify YAML front matter is valid in all skills
-4. Check that symlinks point to correct locations
-5. Ensure README accurately reflects current skills
+3. Test repo-scoped initialization with `./scripts/init-skills-dir.sh`
+4. Verify YAML front matter is valid in all skills
+5. Check that symlinks point to correct locations
+6. Ensure README accurately reflects current skills
 
 ## Good Output Examples
 
@@ -178,6 +182,7 @@ agent-skills/
 ├── README.md              # Repository documentation
 ├── AGENTS.md              # This file
 ├── install-skills.sh      # Installation script
+├── scripts/init-skills-dir.sh # Repo-scoped initializer
 └── skills/                # Skills directory
     ├── code-review/
     │   └── SKILL.md
@@ -201,6 +206,11 @@ agent-skills/
 3. Test the installation script
 4. Commit changes
 
+### Initialize Another Directory
+1. Run `./scripts/init-skills-dir.sh ../other-repo`
+2. Use `--clean` if you need a fresh install
+3. Ensure `.codex/skills` and `.github/skills` were populated
+
 ### Modify Installation Script
 1. Update install-skills.sh
 2. Test all commands: install, uninstall, list
@@ -211,5 +221,5 @@ agent-skills/
 ## Version Information
 
 - Current skill format version: 1.0.0
-- Compatible with: codex-cli, copilot-cli
+- Compatible with: codex-cli, GitHub Copilot, copilot-cli (legacy)
 - YAML front matter standard: Open Agent Skills Standard

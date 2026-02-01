@@ -37,6 +37,7 @@ Optional fields:
    ```bash
    ./install-skills.sh list
    CODEX_SKILLS_DIR=/tmp/test/codex COPILOT_SKILLS_DIR=/tmp/test/copilot ./install-skills.sh install
+   ./scripts/init-skills-dir.sh /tmp/test/repo --clean
    ./scripts/validate-skills.sh
    ```
 4. Ensure README updates reflect new/changed skills.
