@@ -2,6 +2,14 @@
 name: performance-optimization
 description: Performance engineering expert with deep knowledge of optimization techniques, profiling, and performance best practices. Use this skill when analyzing performance issues, optimizing code, or improving system efficiency.
 license: MIT
+tags:
+  - performance
+  - optimization
+  - profiling
+allowed-tools:
+  - bash
+  - git
+  - markdown
 metadata:
   author: Laurence Putra Franslay
   version: 1.0.0
