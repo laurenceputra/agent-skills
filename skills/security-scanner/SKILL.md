@@ -2,6 +2,14 @@
 name: security-scanner
 description: Security expert specializing in identifying and mitigating security vulnerabilities in software applications. Use this skill when scanning for vulnerabilities, reviewing security, or conducting security audits.
 license: MIT
+tags:
+  - security
+  - vulnerability
+  - owasp
+allowed-tools:
+  - bash
+  - git
+  - markdown
 metadata:
   author: Laurence Putra Franslay
   version: 1.0.0

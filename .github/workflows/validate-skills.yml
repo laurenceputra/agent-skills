@@ -1,0 +1,25 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List skills
+        run: ./install-skills.sh list
+
+      - name: Validate skill front matter
+        run: ./scripts/validate-skills.sh
+
+      - name: Test install script
+        env:
+          CODEX_SKILLS_DIR: /tmp/test/codex
+          COPILOT_SKILLS_DIR: /tmp/test/copilot
+        run: ./install-skills.sh install

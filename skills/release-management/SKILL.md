@@ -2,6 +2,14 @@
 name: release-management
 description: Release engineer with expertise in software deployment, versioning, and release processes. Use this skill when planning releases, managing versions, creating changelogs, or coordinating deployments.
 license: MIT
+tags:
+  - release
+  - versioning
+  - deployment
+allowed-tools:
+  - bash
+  - git
+  - markdown
 metadata:
   author: Laurence Putra Franslay
   version: 1.0.0

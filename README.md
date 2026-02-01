@@ -15,6 +15,19 @@ This repository provides a curated set of agent skills covering essential softwa
 - **Debugging Assistant** - Systematic debugging and problem-solving
 - **Refactoring Expert** - Code improvement and design patterns
 
+## Skills Index
+
+| Skill | Description | Path |
+| --- | --- | --- |
+| code-review | Expert code review with focus on quality, bugs, and best practices | [`skills/code-review/SKILL.md`](skills/code-review/SKILL.md) |
+| security-scanner | Identify security vulnerabilities and OWASP Top 10 issues | [`skills/security-scanner/SKILL.md`](skills/security-scanner/SKILL.md) |
+| qa-testing | Test planning, design, and quality assurance | [`skills/qa-testing/SKILL.md`](skills/qa-testing/SKILL.md) |
+| release-management | Version management, releases, and deployment | [`skills/release-management/SKILL.md`](skills/release-management/SKILL.md) |
+| documentation | Technical writing and documentation best practices | [`skills/documentation/SKILL.md`](skills/documentation/SKILL.md) |
+| performance-optimization | Performance analysis and optimization techniques | [`skills/performance-optimization/SKILL.md`](skills/performance-optimization/SKILL.md) |
+| debugging-assistant | Systematic debugging and problem-solving | [`skills/debugging-assistant/SKILL.md`](skills/debugging-assistant/SKILL.md) |
+| refactoring-expert | Code improvement and design patterns | [`skills/refactoring-expert/SKILL.md`](skills/refactoring-expert/SKILL.md) |
+
 ## Installation
 
 ### Quick Install
@@ -51,6 +64,15 @@ Uninstall skills:
 ./install-skills.sh uninstall
 ```
 
+### Validation
+
+Run local validation to confirm skill metadata and install behavior:
+
+```bash
+./scripts/validate-skills.sh
+CODEX_SKILLS_DIR=/tmp/test/codex COPILOT_SKILLS_DIR=/tmp/test/copilot ./install-skills.sh install
+```
+
 ## Skill Format
 
 Each skill follows the Open Agent Skills Standard with proper YAML front matter:
@@ -60,6 +82,10 @@ Each skill follows the Open Agent Skills Standard with proper YAML front matter:
 name: skill-name
 description: Clear description of what this skill does and when to use it
 license: MIT
+tags:
+  - example
+allowed-tools:
+  - bash
 metadata:
   author: Laurence Putra Franslay
   version: 1.0.0
@@ -194,6 +220,8 @@ Contributions are welcome! If you have ideas for new skills or improvements to e
 3. Add or modify skill files in the `skills/` directory
 4. Submit a pull request
 
+For detailed contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ### Skill Format Requirements
 
 Each skill must follow this structure:
@@ -229,6 +257,18 @@ See existing skills for examples.
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
+
+## Security
+
+Please report security issues via the process described in [SECURITY.md](SECURITY.md).
+
+## Code of Conduct
+
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community expectations.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for notable updates.
 
 ## Support
 
