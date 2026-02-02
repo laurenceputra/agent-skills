@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Agent Skills Installer
-# This script creates symlinks for agent skills in codex-cli and copilot-cli skills directories
+# This script copies agent skills into codex-cli and a secondary skills directory
 
 set -e
 
@@ -26,7 +26,7 @@ if [ ! -d "$SKILLS_DIR" ]; then
     exit 1
 fi
 
-# Function to create symlinks for a CLI tool
+# Function to copy skills for a CLI tool
 install_skills() {
     local cli_name=$1
     local cli_dir=$2
@@ -40,22 +40,22 @@ install_skills() {
         mkdir -p "$cli_dir"
     fi
     
-    # Create symlinks for each skill directory
+    # Copy each skill directory
     local count=0
     for skill_dir in "$SKILLS_DIR"/*/; do
         if [ -d "$skill_dir" ] && [ -f "$skill_dir/SKILL.md" ]; then
             local skill_name=$(basename "$skill_dir")
             local target="$cli_dir/$skill_name"
             
-            # Remove existing symlink or directory
+            # Remove existing directory or symlink
             if [ -e "$target" ] || [ -L "$target" ]; then
                 echo -e "  Removing existing: $skill_name"
                 rm -rf "$target"
             fi
             
-            # Create symlink to the skill directory
-            ln -s "$skill_dir" "$target"
-            echo -e "  ${GREEN}✓${NC} Linked: $skill_name"
+            # Copy the skill directory
+            cp -R "$skill_dir" "$target"
+            echo -e "  ${GREEN}✓${NC} Copied: $skill_name"
             count=$((count + 1))
         fi
     done
@@ -87,6 +87,10 @@ uninstall_skills() {
                 rm -f "$target"
                 echo -e "  ${GREEN}✓${NC} Removed: $skill_name"
                 count=$((count + 1))
+            elif [ -d "$target" ] && [ -f "$target/SKILL.md" ]; then
+                rm -rf "$target"
+                echo -e "  ${GREEN}✓${NC} Removed: $skill_name"
+                count=$((count + 1))
             fi
         fi
     done
@@ -97,7 +101,7 @@ uninstall_skills() {
 
 # Default skill directories
 CODEX_SKILLS_DIR="${CODEX_SKILLS_DIR:-$HOME/.codex/skills}"
-COPILOT_SKILLS_DIR="${COPILOT_SKILLS_DIR:-$HOME/.copilot-cli/skills}"
+COPILOT_SKILLS_DIR="${COPILOT_SKILLS_DIR:-$HOME/.copilot/skills}"
 
 # Parse command line arguments
 COMMAND="${1:-install}"
@@ -107,12 +111,12 @@ case "$COMMAND" in
         echo "Installing agent skills..."
         echo ""
         install_skills "codex-cli" "$CODEX_SKILLS_DIR"
-        install_skills "copilot-cli" "$COPILOT_SKILLS_DIR"
+        install_skills "secondary target" "$COPILOT_SKILLS_DIR"
         echo -e "${GREEN}Installation complete!${NC}"
         echo ""
-        echo "Skills have been symlinked to:"
+        echo "Skills have been copied to:"
         echo "  - codex-cli: $CODEX_SKILLS_DIR"
-        echo "  - copilot-cli: $COPILOT_SKILLS_DIR"
+        echo "  - secondary target: $COPILOT_SKILLS_DIR"
         echo ""
         echo "To use custom directories, set these environment variables:"
         echo "  export CODEX_SKILLS_DIR=/your/custom/path"
@@ -123,7 +127,7 @@ case "$COMMAND" in
         echo "Uninstalling agent skills..."
         echo ""
         uninstall_skills "codex-cli" "$CODEX_SKILLS_DIR"
-        uninstall_skills "copilot-cli" "$COPILOT_SKILLS_DIR"
+        uninstall_skills "secondary target" "$COPILOT_SKILLS_DIR"
         echo -e "${GREEN}Uninstallation complete!${NC}"
         ;;
     
@@ -143,13 +147,13 @@ case "$COMMAND" in
         echo "Usage: $0 [install|uninstall|list]"
         echo ""
         echo "Commands:"
-        echo "  install    - Install skills by creating symlinks (default)"
-        echo "  uninstall  - Remove skill symlinks"
+        echo "  install    - Install skills by copying directories (default)"
+        echo "  uninstall  - Remove installed skill copies"
         echo "  list       - List available skills"
         echo ""
         echo "Environment Variables:"
         echo "  CODEX_SKILLS_DIR    - Custom path for codex-cli skills (default: ~/.codex/skills)"
-        echo "  COPILOT_SKILLS_DIR  - Custom path for copilot-cli skills (default: ~/.copilot-cli/skills)"
+        echo "  COPILOT_SKILLS_DIR  - Custom path for secondary skills (default: ~/.copilot/skills)"
         exit 1
         ;;
 esac

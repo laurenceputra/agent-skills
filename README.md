@@ -1,6 +1,6 @@
 # Agent Skills
 
-A collection of common agent skills that work across coding projects in various languages. These skills are designed to be used with codex-cli and copilot-cli to enhance AI coding assistants with specialized expertise.
+A collection of common agent skills that work across coding projects in various languages. These skills are designed to be used with codex-cli and GitHub Copilot to enhance AI coding assistants with specialized expertise.
 
 ## Overview
 
@@ -32,11 +32,13 @@ This repository provides a curated set of agent skills covering essential softwa
 
 ### Quick Install
 
-Install skills for both codex-cli and copilot-cli:
+Install skills for codex-cli and a secondary skills directory:
 
 ```bash
 ./install-skills.sh
 ```
+
+For GitHub Copilot repo-scoped usage, use `./scripts/init-skills-dir.sh` below to populate `.github/skills`.
 
 ### Custom Installation
 
@@ -48,9 +50,30 @@ export COPILOT_SKILLS_DIR=/path/to/your/copilot/skills
 ./install-skills.sh
 ```
 
+These variables apply to `./install-skills.sh` (codex-cli and a secondary target). For GitHub Copilot repo-scoped setup, use `./scripts/init-skills-dir.sh` below.
+
 Default directories:
-- codex-cli: `~/.codex/skills`
-- copilot-cli: `~/.copilot-cli/skills`
+- codex-cli (user scope): `~/.codex/skills`
+- secondary target (default): `~/.copilot/skills`
+- GitHub Copilot (repo scope): `.github/skills` (use `./scripts/init-skills-dir.sh`)
+
+### Initialize Another Directory (Repo-Scoped)
+
+Initialize skills in another directory relative to your current working directory (for GitHub Copilot repo-scoped usage):
+
+```bash
+./scripts/init-skills-dir.sh ../other-repo
+```
+
+This creates repo-scoped skill directories:
+- Codex: `.codex/skills`
+- GitHub Copilot: `.github/skills`
+
+By default, existing skill entries are skipped. Use `--clean` to remove existing entries before installing:
+
+```bash
+./scripts/init-skills-dir.sh ../other-repo --clean
+```
 
 ### Other Commands
 
@@ -107,7 +130,7 @@ Each skill is in its own directory containing a `SKILL.md` file with:
 - **YAML front matter** with required metadata
 - **Markdown content** describing the skill's expertise and guidelines
 
-This format is compatible with both codex-cli and copilot-cli.
+This format is compatible with both codex-cli and GitHub Copilot.
 
 ## Skills Description
 
@@ -179,7 +202,7 @@ Refactoring specialist that:
 
 ## Usage
 
-Once installed, these skills will be available in your codex-cli or copilot-cli. The exact usage depends on how your CLI tool implements skills, but typically you can:
+Once installed, these skills will be available in your codex-cli or GitHub Copilot. The exact usage depends on how your tool implements skills, but typically you can:
 
 1. Reference the skill in your prompts
 2. Use skill-specific commands if available
@@ -187,7 +210,7 @@ Once installed, these skills will be available in your codex-cli or copilot-cli.
 
 Example:
 ```
-# In codex-cli or copilot-cli
+# In codex-cli or GitHub Copilot
 "Use the code-review skill to review my recent changes"
 "Apply the security-scanner skill to check for vulnerabilities"
 "Use the refactoring-expert skill to improve this code"
@@ -195,10 +218,10 @@ Example:
 
 ## How It Works
 
-The installation script creates symlinks from this repository's skill directories to your CLI tools' skills directories. Each skill is a directory containing a `SKILL.md` file with YAML front matter. This means:
+The installation scripts copy this repository's skill directories into your tools' skills directories. For GitHub Copilot repo-scoped usage, `./scripts/init-skills-dir.sh` populates `.github/skills`. Each skill is a directory containing a `SKILL.md` file with YAML front matter. This means:
 
-- ✅ Skills stay in sync with this repository
-- ✅ Easy to update (just pull latest changes)
+- ✅ Easy to update (pull latest changes, then reinstall)
+- ✅ Safe to customize locally without affecting the repo
 - ✅ Single source of truth for all skills
 - ✅ Works across multiple CLI tools
 
@@ -208,7 +231,7 @@ To get the latest skills:
 
 ```bash
 git pull
-# Skills are automatically updated via symlinks
+./install-skills.sh install
 ```
 
 ## Contributing
