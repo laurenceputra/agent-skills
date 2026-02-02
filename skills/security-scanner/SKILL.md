@@ -11,7 +11,7 @@ allowed-tools:
   - git
   - markdown
 metadata:
-  author: @laurenceputra
+  author: laurenceputra
   version: 1.0.0
 ---
 
